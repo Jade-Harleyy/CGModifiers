@@ -63,9 +63,9 @@ namespace CGModifiers.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] cgmodifiers {
+        internal static byte[] assets {
             get {
-                object obj = ResourceManager.GetObject("cgmodifiers", resourceCulture);
+                object obj = ResourceManager.GetObject("assets", resourceCulture);
                 return ((byte[])(obj));
             }
         }

@@ -11,7 +11,7 @@ namespace CGModifiers
 
         private void Awake()
         {
-            assets = AssetBundle.LoadFromMemory(Properties.Resources.cgmodifiers);
+            assets = AssetBundle.LoadFromMemory(Properties.Resources.assets);
 
             new Harmony(PluginInfo.PLUGIN_GUID + ".harmony").PatchAll();
             Logger.LogInfo($"Plugin {PluginInfo.PLUGIN_GUID} is loaded!");
