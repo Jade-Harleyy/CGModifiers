@@ -8,8 +8,18 @@ namespace CGModifiers
     {
         private WaveMenu wm;
 
-        public ValueSelector waveSelect, startingPointsSelector, pointMultiplierSelector;
-        public ValueToggler forceRadianceToggle;
+        // Wave Select
+        public ValueSelector waveSelect;
+
+        // Wave Modifiers
+        public ValueSelector startingPointsSelector, pointMultiplierSelector;
+
+        // Enemy Modifiers
+        public ValueToggler forceRadianceToggler;
+
+        // Arena Modifiers
+        public ValueToggler scoreboardToggler;
+        public ValueSelector zapZoneHeightSelector;
 
         private void Start()
         {
