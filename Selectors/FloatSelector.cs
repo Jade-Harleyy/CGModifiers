@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace CGModifiers
 {
-    public class ValueSelector : MonoBehaviour
+    public class FloatSelector : MonoBehaviour
     {
         public string identifier;
 
@@ -31,7 +31,7 @@ namespace CGModifiers
             set
             {
                 this.value = Mathf.Clamp(value, CheatsEnabled ? minValueWithCheats : minValue, CheatsEnabled ? maxValueWithCheats : maxValue);
-                if (!string.IsNullOrWhiteSpace(identifier)) PrefsManager.Instance.SetFloatLocal(identifier, Value);
+                PrefsManager.Instance.SetFloatLocal(identifier, Value);
                 onValueChanged?.Invoke(Value);
 
                 increaseButtons.Do(btn => btn.failure = Value >= (CheatsEnabled ? maxValueWithCheats : maxValue));

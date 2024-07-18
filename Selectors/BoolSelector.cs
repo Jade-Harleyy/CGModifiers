@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace CGModifiers
 {
-    public class ValueToggler : MonoBehaviour
+    public class BoolSelector : MonoBehaviour
     {
         public string identifier;
 
@@ -26,7 +26,7 @@ namespace CGModifiers
             {
                 if (requireCheatsToToggle && !CheatsEnabled) return;
                 this.value = value;
-                if (!string.IsNullOrWhiteSpace(identifier)) PrefsManager.Instance.SetBoolLocal(identifier, Value);
+                PrefsManager.Instance.SetBoolLocal(identifier, Value);
                 onValueChanged?.Invoke(Value);
 
                 checkmark.SetActive(Value);

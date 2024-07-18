@@ -4,22 +4,23 @@ using UnityEngine;
 namespace CGModifiers
 {
     [ConfigureSingleton(SingletonFlags.NoAutoInstance)]
-    public class ValueManager : MonoSingleton<ValueManager>
+    public class ModifierManager : MonoSingleton<ModifierManager>
     {
         private WaveMenu wm;
 
         // Wave Select
-        public ValueSelector waveSelect;
+        public FloatSelector waveSelect;
 
         // Wave Modifiers
-        public ValueSelector startingPointsSelector, pointMultiplierSelector;
+        public FloatSelector startingPointsSelector, pointMultiplierSelector;
 
         // Enemy Modifiers
-        public ValueToggler forceRadianceToggler;
+        //public StringSelector forceRadianceSelector;
+        public BoolSelector forceRadianceSelector;
 
         // Arena Modifiers
-        public ValueToggler scoreboardToggler;
-        public ValueSelector zapZoneHeightSelector;
+        public BoolSelector scoreboardToggler;
+        public FloatSelector zapZoneHeightSelector;
 
         private void Start()
         {

@@ -38,7 +38,7 @@ namespace CGModifiers
 
             wavePanelTF.Find("0").GetComponent<WaveSetter>().wave = 1;
 
-            Instantiate(assets.LoadAsset<GameObject>("Modifiers Terminal"), GameObject.Find(FirstRoomPath).transform, false).GetComponent<ValueManager>().waveSelect = waveSelector.GetComponent<ValueSelector>();
+            Instantiate(assets.LoadAsset<GameObject>("Modifiers Terminal"), GameObject.Find(FirstRoomPath).transform, false).GetComponent<ModifierManager>().waveSelect = waveSelector.GetComponent<FloatSelector>();
         }
     }
 }
