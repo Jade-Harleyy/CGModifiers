@@ -44,8 +44,6 @@ namespace CGModifiers
 
             Transform zapZone = GameObject.Find("/Everything").transform.GetChild(4);
             zapZone.localPosition = new(zapZone.localPosition.x, ModifierManager.Instance.zapZoneHeightSelector.Value * 2.5f + 10.5f, zapZone.localPosition.z);
-
-            GameObject.Find("/Everything").transform.GetChild(4);
         }
 
         [HarmonyPatch(typeof(EndlessGrid), "OnTriggerEnter"), HarmonyPostfix]
@@ -53,7 +51,7 @@ namespace CGModifiers
         {
             if (!other.CompareTag("Player")) return;
 
-            GameObject.Find("/Everything").transform.GetChild(4).gameObject.SetActive(ModifierManager.Instance.scoreboardToggler.Value);
+            GameObject.Find("/Everything").transform.GetChild(4).Find("Canvas").gameObject.SetActive(ModifierManager.Instance.scoreboardToggler.Value);
         }
 
 
