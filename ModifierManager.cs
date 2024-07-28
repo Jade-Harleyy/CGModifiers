@@ -8,22 +8,37 @@ namespace CGModifiers
     {
         private WaveMenu wm;
 
-        // Wave Select
         public FloatSelector waveSelect;
 
-        // Wave Modifiers
-        public FloatSelector startingPointsSelector, pointMultiplierSelector;
+        [Header("Wave Modifiers")]
+        public FloatSelector startingPointsSelector;
+        public FloatSelector pointMultiplierSelector;
 
-        // Enemy Modifiers
-        //public StringSelector forceRadianceSelector;
+        [Header("Enemy Modifiers")]
+        //public StringSelector forceRadianceSelector; //TODO
         public BoolSelector forceRadianceSelector;
+        public FloatSelector initialUncommonsSelector; //TODO
+        public FloatSelector uncommonsIncreaseSelector; //TODO
+        public FloatSelector initialSpecialsSelector; //TODO
+        public FloatSelector specialsIncreaseSelector; //TODO
 
-        // Arena Modifiers
+        [Header("Arena Modifiers")]
         public BoolSelector scoreboardToggler;
         public FloatSelector zapZoneHeightSelector;
+        public BoolSelector visibleOOBSelector;
+        public Material OOBMaterial;
+
+        [Header("Player Modifiers")]
+        public FloatSelector maxStaminaSelector; //TODO
+        public FloatSelector staminaRegenSelector; //TODO
 
         private void Start()
         {
+            GetComponentsInChildren<FloatSelector>(true).Do(s => s.Init());
+            GetComponentsInChildren<BoolSelector>(true).Do(s => s.Init());
+            GetComponentsInChildren<StringSelector>(true).Do(s => s.Init());
+            waveSelect.Init();
+
             wm = waveSelect.GetComponentInParent<WaveMenu>();
 
             waveSelect.maxValue = Mathf.Min(Traverse.Create(wm).Field("highestWave").GetValue<int>() / 2, 25);

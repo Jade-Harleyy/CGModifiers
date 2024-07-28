@@ -33,9 +33,9 @@ namespace CGModifiers
             }
         }
 
-        private void Awake()
+        public void Init()
         {
-            button = GetComponentInChildren<ShopButton>();
+            button = GetComponentInChildren<ShopButton>(true);
             checkmark = transform.Find("Toggle/Checkmark").gameObject;
 
             Value = PrefsManager.Instance.GetBoolLocal(identifier, defaultValue);

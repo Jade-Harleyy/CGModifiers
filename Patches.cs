@@ -41,9 +41,6 @@ namespace CGModifiers
             {
                 ___maxPoints += Mathf.RoundToInt((3 + i / 3) * (ModifierManager.Instance.pointMultiplierSelector.Value * (ModifierManager.Instance.forceRadianceSelector.Value/* == "Always On"*/ ? 3 : 1) - 1));
             }
-
-            Transform zapZone = GameObject.Find("/Everything").transform.GetChild(4);
-            zapZone.localPosition = new(zapZone.localPosition.x, ModifierManager.Instance.zapZoneHeightSelector.Value * 2.5f + 10.5f, zapZone.localPosition.z);
         }
 
         [HarmonyPatch(typeof(EndlessGrid), "OnTriggerEnter"), HarmonyPostfix]
@@ -51,7 +48,16 @@ namespace CGModifiers
         {
             if (!other.CompareTag("Player")) return;
 
-            GameObject.Find("/Everything").transform.GetChild(4).Find("Canvas").gameObject.SetActive(ModifierManager.Instance.scoreboardToggler.Value);
+            Transform arenaTF = GameObject.Find("/Everything").transform;
+
+            Transform zapZone = arenaTF.GetChild(4);
+            zapZone.localPosition = new(zapZone.localPosition.x, ModifierManager.Instance.zapZoneHeightSelector.Value * 2.5f + 10.5f, zapZone.localPosition.z);
+
+            zapZone.Find("Canvas").gameObject.SetActive(ModifierManager.Instance.scoreboardToggler.Value);
+
+            Renderer oob = GameObject.Find("/OutOfBounds").GetComponent<Renderer>();
+            oob.enabled = true;
+            oob.material = ModifierManager.Instance.OOBMaterial;
         }
 
 
@@ -81,6 +87,12 @@ namespace CGModifiers
                 return false;
             }
             return true;
+        }
+
+        [HarmonyPatch(typeof(EndlessGrid), "CapUncommonsAmount"), HarmonyPostfix]
+        private static void EndlessGrid_CapUncommonsAmount_Postfix(ref int __result)
+        {
+            __result += (int)ModifierManager.Instance.initialUncommonsSelector.Value;
         }
     }
 }

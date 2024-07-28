@@ -32,9 +32,9 @@ namespace CGModifiers
             }
         }
 
-        private void Awake()
+        public void Init()
         {
-            dropdown = GetComponentInChildren<TMP_Dropdown>();
+            dropdown = GetComponentInChildren<TMP_Dropdown>(true);
             foreach (string option in options)
             {
                 dropdown.options.Add(new TMP_Dropdown.OptionData(option));

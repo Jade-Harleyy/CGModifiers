@@ -34,14 +34,12 @@ namespace CGModifiers
                 PrefsManager.Instance.SetFloatLocal(identifier, Value);
                 onValueChanged?.Invoke(Value);
 
-                increaseButtons.Do(btn => btn.failure = Value >= (CheatsEnabled ? maxValueWithCheats : maxValue));
-                decreaseButtons.Do(btn => btn.failure = Value <= (CheatsEnabled ? minValueWithCheats : minValue));
-                if (resetButton) resetButton.deactivated = Value == defaultValue;
+                Invoke("UpdateButtons", 0); // Prevents it from changing before the button plays the noise
                 SetText(Value);
             }
         }
 
-        private void Awake()
+        public void Init()
         {
             valueText = transform.Find("Value/Text").GetComponent<TextMeshProUGUI>();
             increaseButtons = [transform.Find(">").GetComponent<ShopButton>(), transform.Find(">>").GetComponent<ShopButton>()];
@@ -64,6 +62,13 @@ namespace CGModifiers
         private void SetText(float value)
         {
             valueText.text = value.ToString() + suffix;
+        }
+
+        private void UpdateButtons()
+        {
+            increaseButtons.Do(btn => btn.failure = Value >= (CheatsEnabled ? maxValueWithCheats : maxValue));
+            decreaseButtons.Do(btn => btn.failure = Value <= (CheatsEnabled ? minValueWithCheats : minValue));
+            if (resetButton) resetButton.deactivated = Value == defaultValue;
         }
     }
 }
