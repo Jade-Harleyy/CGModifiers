@@ -56,7 +56,7 @@ namespace CGModifiers
             zapZone.Find("Canvas").gameObject.SetActive(ModifierManager.Instance.scoreboardToggler.Value);
 
             Renderer oob = GameObject.Find("/OutOfBounds").GetComponent<Renderer>();
-            oob.enabled = true;
+            oob.enabled = ModifierManager.Instance.visibleOOBSelector.Value;
             oob.material = ModifierManager.Instance.OOBMaterial;
         }
 
